@@ -278,9 +278,16 @@ body {
 .header-alignment {
     text-align: center;
 }
+.closeIcon {
+    position: absolute;
+    width: 1em;
+    left: 0.7%;
+    top: 20px;
+}
 .main-header {
     display: inline-flex;
-    font-size: 1em;
+    font-size: 0.9em;
+    margin-left: 1%;
     color: #2c3e50;
 }
 
@@ -307,7 +314,7 @@ body {
 
 .sub-heading {
     margin-top: -3%;
-    font-size: 1.25em;
+    font-size: 0.8em;
     padding-left: 5%
 }
 
