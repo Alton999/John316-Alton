@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport"
+              content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-1.5.0.mobile.min.css">
+        <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+        <title>John 3:16</title>
+    </head>
+    <body>
+
+        <div class="confetti-fireworks-container hide" scrolling="no" style="overflow:hidden; border: 0; position:absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%; z-index:1000;pointer-events: none;">
+            <canvas class="canvas" width="100%" height="100%" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+
+            <!-- Confetti -->
+            <canvas class="world" width="100%" height="100%" style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+        </div>
+
+        <!-- Added by Frank Grisafi 11/7/2017 -->
+        <input id="forwardbackward" type="checkbox">
+        <!-- End of Added by Frank Grisafi 11/7/2017 -->
+
+        <div class="stage tappable">
+
+            <div id="jesus" class="npc jesus"></div>
+
+            <div id="listener" class="avatar avatar__right">
+                <div id="listener-cross" class="prop avatar--prop__cross"></div>
+                <div class="avatar--name"></div>
+                <div id="listener-heart" class="prop avatar--prop__heart pulse"></div>
+                <div id="first-aid-box" class="prop avatar--prop__first-aid-box"></div>
+            </div>
+
+            <div id="speaker" class="avatar avatar__left">
+                <div id="speaker-cross" class="prop avatar--prop__cross"></div>
+                <div id="speaker-heart" class="prop avatar--prop__heart pulse"></div>
+                <div class="avatar--name"></div>
+            </div>
+
+            <div id="good-works-lady" class="npc good-works-lady">
+                <div id="good-works-lady-heart" class="prop avatar--prop__heart"></div>
+            </div>
+        </div>
+
+        <div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="none">
+
+            <div class="ui-panel-inner">
+                <ul data-role="listview">
+                    <li class="i18next" data-i18next-key="scene-0-1-options-header">OPTIONS</li>
+
+                    <li>
+                        <div class="menu--option__language" data-role="collapsible" data-inset="false">
+                            <!-- This text is localized dynamically using javascript -->
+                            <h2>LANGUAGE</h2>
+
+                            <ul class="menu--language-list" data-role="listview">
+                                <li class="menu--language menu--language__selected" lang="en">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-english" href="#">English</a>
+                                </li>
+
+                                <li class="menu--language" lang="zh-Hans">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-mandarin" href="#">汉语</a>
+                                </li>
+
+                                <li class="menu--language" lang="zh-Hant">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-traditional-chinese" href="#">漢語</a>
+                                </li>
+
+                                <li class="menu--language" lang="zh-HK">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-cantonese" href="#">繁體中文</a>
+                                </li>
+
+                                <li class="menu--language" lang="de">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-german" href="#">DEUTSCHE</a>
+                                </li>
+                                
+                                <li class="menu--language" lang="ko">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-korean" href="#">한국어</a>
+                                </li>
+
+                                <li class="menu--language" lang="sv">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-swiss" href="#">SVENSKA</a>
+                                </li>
+
+                                <li class="menu--language" lang="ru">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-russian" href="#"></a>
+                                </li>
+
+                                <li class="menu--language" lang="th">
+                                    <a class="i18next" data-i18next-key="scene-0-1-language-thai" href="#"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="menu--option__tutorial" data-inset="false">
+                            <a href="#scene-0-0-2" data-transition="none" class="i18next sidebarmenufont" data-i18next-key="scene-0-1-tutorial">TUTORIAL</a>
+                            
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="menu--option__about" data-inset="false">
+                            <a href="#scene-0-0-1" data-transition="none" class="i18next sidebarmenufont" data-i18next-key="scene-0-0-1-about">ABOUT US</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-0-0" class="scene tappable" data-dom-cache="true">
+
+            <div class="content" id = "button_back">
+                <div style="transform: scale(1.3) translate(0px, -30px);" class="button black i18next" data-destination="scene-0-1" data-i18next-key="scene-0-0-begin-button">
+                    BEGIN
+                </div>
+
+                <div class="footer">
+                    <div class="button gear" data-menu="menu">
+                        <img src="images/gear_button.png"/>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-0-0-1" class="scene tappable" data-dom-cache="true" style="background-color:#000;">
+
+            <div class="content-not-used font-color-white" style="margin: 0;font-size: 14px;line-height: 1.42857143;text-shadow:none;">
+
+                <div class="container-fluid" style="padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;">
+                    <div class="row" id="topbar" style="min-height: 58px;background-position: center top;background-size: 100% auto;height: 9vh;">
+                        <div class="col-xs-12">
+                            <a href="#scene-0-0" style="background-color: transparent;color: #337ab7;text-decoration: underline;" data-transition="none">
+                                <img style="padding-top: 12px;border: 0;vertical-align: middle;page-break-inside: avoid;max-width: 100%!important;" src="images/left_arrow_2.png" alt="">
+                            </a>
+                            <h2 class="text-center i18next" data-i18next-key="scene-0-0-1-about">ABOUT US</h2>
+                        </div>
+                    </div>
+                    <div class="row" id="whiteline"></div>
+                    <div class="row" id="bg-1">
+                        <div class="col-xs-12">
+                            <h4 class="i18next" data-i18next-key="scene-0-0-1-about-app">ABOUT THE APP</h4>
+                            <p style="margin: 0 0 10px;" class="i18next" data-i18next-key="scene-0-0-1-about-app-content">This app was conceived and funded by Pastor How as a free tool for the members of Heart of God Church (Singapore) to conveniently share their faith. It has since been used by many Christians and churches all over the world. If you find this app helpful, feel free to use or share it with others.</p>
+                        </div>
+                    </div>
+                    <div class="row" id="bg-2">
+                        <div class="col-xs-8">
+                            <br style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;">
+                            <h4 style="margin-top: 0px;" class="i18next" data-i18next-key="scene-0-0-1-about-developer">ABOUT THE DEVELOPER</h4>
+                            <p style="margin: 0 0 10px;" class="i18next" data-i18next-key="scene-0-0-1-about-developer-content">Pastor How is a youth pastor at heart, but on weekends, he disguises himself as the Senior Pastor of Heart of God Church. He has a PhD in curiosity and shares his ideas about leading a Youth Church on:</p>
+                            <p style="margin: 0 0 10px;"><b style="font-weight: 700;"><a href="http://www.PastorHow.com" target="_blank" style="background-color: transparent;color: #337ab7;text-decoration: underline;">www.PastorHow.com</a></b></p>
+                        </div>
+                        <div class="col-xs-4"></div>
+                    </div>
+
+                    <div class="row" id="bg-3">
+                        <div class="col-xs-12">
+                            <h4 style="margin-top: 10px;margin-bottom: 10px;"><a class="i18next" data-i18next-key="scene-0-0-1-about-hogc" href="http://heartofgodchurch.org" target="_blank">ABOUT HOGC</a></h4>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="row" id="bg-4">
+                        <div class="col-xs-12">
+                            <p style="margin: 0 0 10px;" class="i18next" data-i18next-key="scene-0-0-1-about-social-content">Heart of God Church (HOGC) is an independent youth church in Singapore. To find out more about us or our Senior Pastors, Pastor How and Pastor Lia, visit www.heartofgodchurch.org or follow us on social media.</p>
+                        </div>
+                        <div class="col-xs-12">
+                            <ul>
+                                <li class="social-text">HOGC<div>:</div></li>
+                                <li class=""><a target="_blank" href="https://www.facebook.com/HOGCsg"><img src="images/icon-facebook.png" /></a></li>
+                                <li class=""><a target="_blank" href="https://twitter.com/HOGC"><img src="images/icon-twitter.png" /></a></li>
+                                <li class=""><a target="_blank" href="https://www.instagram.com/hogc/"><img src="images/icon-instagram.png" /></a></li>
+                            </ul>
+                            <ul>
+                                <li class="social-text">Pastor How<div>:</div></li>
+                                <li class=""><a target="_blank" href="https://www.facebook.com/pastorhow"><img src="images/icon-facebook.png" /></a></li>
+                                <li class=""><a target="_blank" href="https://twitter.com/seowhow"><img src="images/icon-twitter.png" /></a></li>
+                                <li class=""><a target="_blank" href="https://www.instagram.com/pastor.how/"><img src="images/icon-instagram.png" /></a></li>
+                            </ul>
+                            <ul>
+                                <li class="social-text">Pastor Lia<div>:</div></li>
+                                <li class=""><a target="_blank" href="https://www.facebook.com/pastorlia"><img src="images/icon-facebook.png" /></a></li>
+                                <li class=""><a target="_blank" href="https://twitter.com/lia_chan"><img src="images/icon-twitter.png" /></a></li>
+                                <li class=""><a target="_blank" href="https://www.instagram.com/pastor.lia/"><img src="images/icon-instagram.png" /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Featured Messages & Articles -->
+                    <div class="row" id="bg-5">
+                        <div class="col-xs-12">
+                            <h4 class="i18next" data-i18next-key="scene-0-0-1-about-featured">FEATURED MESSAGES & ARTICLES</h4>
+                            <ul>
+                                <li class=""><a target="_blank" href="http://pastorhow.com/tanseowhow/my-answer-to-prosperity-theology-contentment-simplicity-generosity/"><img src="images/msg-prosperity.jpg" /></a></li>
+                                <li class=""><a target="_blank" href="http://pastorhow.com/tanseowhow/thepowerofteam-heart-of-god-church/"><img src="images/msg-team.jpg" /></a></li>
+                                <li class=""><a target="_blank" href="http://pastorhow.com/tanseowhow/the-few-good-men/"><img src="images/msg-few-good-many.jpg" /></a></li>
+                                <li class=""><a target="_blank" href="http://pastorhow.com/oops-series/"><img src="images/msg-oops.jpg" /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="page" id="scene-0-0-2" class="scene tappable" data-dom-cache="true" style="background-color:#fff;">
+            <!-- BC -->
+            <div data-role="header" data-position="fixed" class="bg-dark">
+                <a data-role="none" href="#scene-0-0">Close</a>
+                <h3>&nbsp;</h3>
+            </div>
+
+            <div class="content-not-used" style="margin: 0;font-size: 20px;line-height: 1.42857143;text-shadow:none;">
+                <div class="container-fluid" style="padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;">
+                    <div class=header-alignment>
+                        <div class="main-header">
+                            <h2 class="i18next" data-i18next-key="scene-0-0-2-tutorial-john"> JOHN</h2><h2 class="i18next dark-font" data-i18next-key="scene-0-0-2-tutorial-316" style="margin-right: 10px;">316</h2><h2 class="i18next" data-i18next-key="scene-0-0-2-tutorial-guide">GUIDE</h2>  
+                        </div>
+                    </div>   
+                    <h3 class="i18next blue-bg sub-heading" data-i18next-key="scene-0-0-2-tutorial-sharing">SHARING</h3>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point1-span">1.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point1"> In the beginning, God created the heavens and Earth.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point2-span">2.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point2">He also created you and I.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point3-span">3.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point3">God loves us and wants a relationship with us.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point4John">4. John 17:3</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point4"> - And this is the way to have eternal life - to <span>know </span> you, the only true God, and Jesus Christ, the one you sent to Earth.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point5-span">5.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point5"> Christianity is not a religion but a relationship with God. This relationship brings us true love, joy and peace.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point6-span">6.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point6">Our relationship with God is broken because of sin.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point7-span">7.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point7a">Sin is as simple as selfishness, lying or lust to as serious as stealing, murder or rebellion towards God.</p><strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point7Romans">Romans 3:23</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point7b"> For everyone has sinned; we all fall short of GOd's glorious standards.</p> 
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point8-span">8.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point8"> Because of sin and our broken relationship with God the father, we will not know our true purpose in life. We are also uncertain of our eternal future.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point9Romans">9. Romans 6:23</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point9"> - The penalty of sin is death, but the free gift of God is eternal life through Christ Jesus our Lord.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point10-span">10.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point10"> We try to reconcile our relationship with God through many ways.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point11-span">11.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point11"> Some of us try to find happiness by pursuing success, but it does not mend our broken relationship with God.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point12-span">12.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point12"> Some of us try to do good and be good, but relationship with GOd cannot be earned or bought. It is a gift from God.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point13-span">13.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point13"> Some of us try religions or philosophies but God is looking for a loving personal relationship.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point14-span">14.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point14"> All our efforts are not enough to mend this broken relationship. The good news is that God loves us so much that He made the first move.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point15John">15. John 3:16 </strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point15"> - For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point16-span">16.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point16"> Jesus came on our behalf, and paid the penalty of our sins, by dying on the cross. Our sins can now be erased.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point17-span">17.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point17"> I made a wonderful and life-changing decision to have a relationship with God.</p>
+                    <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point18-span">18.</strong><p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point18"> So now, would you like to join me and have your own relationship with God?</p>
+                    <div class="bullet">
+                        <strong class="i18next" data-i18next-key="scene-0-0-2-tutorial-point19a-span">19a.</strong>
+                        <strong class="i18next dark-font" data-i18next-key="scene-0-0-2-tutorial-point19-[IFYES]">[IF YES]</strong>  
+                    </div>
+                    <p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point19-Prayer" > Prayer: Dear Father God, I admit that I am a sinner, and I ask for your forgiveness. I believe that Jesus Christ died for me on the cross and rose again. I confess that Jesus is my Lord and Saviour. Holy Spirit, help me to obey and follow God. Change me from the inside out. In the name of Jesus, amen.</p>
+                    <p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point19-Congrats">CONGRATULATIONS! You have made the best decision of your life!</p>
+                    <div class="bullet">
+                        <strong class="i18next bullet" data-i18next-key="scene-0-0-2-tutorial-point19b-span">19b.</strong><strong class="i18next dark-font" data-i18next-key="scene-0-0-2-tutorial-point19-[IFNO]">[IF NO]</strong> 
+                    </div>
+                    <p class="i18next" data-i18next-key="scene-0-0-2-tutorial-point19-[Prayer?]"> Can I pray a prayer of blessing for you?</p>
+                    <br>
+                    <h3 style="font-size: 0.9em;" class="i18next sub-heading blue-bg" data-i18next-key="scene-0-0-2-tutorial-what">WHAT YOU NEED TO DO NOW...</h3>
+                    <strong class="i18next" data-i18next-key="scene-0-0-2-tutorial-attend">1. ATTEND A GOOD CHURCH REGULARLY</strong>
+                    <p class="i18next" data-i18next-key="scene-0-0-2-tutorial-join">You are now like a baby Christian, you must have a spiritual family and home. Would you like to join me in church this coming weekend?</p>
+                    <strong class="i18next" data-i18next-key="scene-0-0-2-tutorial-read">2. READ THE BIBLE</strong>
+                    <p class="i18next" data-i18next-key="scene-0-0-2-tutorial-recommend">We recommend that you start with the Gospel of Luke.</p>
+
+                    <div class="resources">
+                        <h4 class="i18next resource-heading" data-i18next-key="scene-0-0-2-tutorial-freeBibles">Free Bibles</h4>
+                        <ul>
+                            <li class="i18next resource-item" data-i18next-key="scene-0-0-2-tutorial-life">
+                                Bible by Life Church
+                            </li>
+                            <li class="i18next resource-item" data-i18next-key="scene-0-0-2-tutorial-olive">
+                                Bible+ by Olive Tree
+                            </li>
+                        </ul>
+                    </div>   
+                </div>
+                <div class="footer">
+                    <p class="footer-p">Copyright © Pastor Tan Seow How 2016. All rights reserved.</p>
+                    <p class="footer-p">Designed by Heart of God Church Singapore</p>
+                </div>
+            </div>
+        </div>
+        <div data-role="page" id="scene-0-1" class="scene tappable" data-dom-cache="true">
+
+            <div class="content">
+
+                <div class="avatar-picker shiftup" data-avatar-type="speaker">
+
+                    <div class="title i18next" data-i18next-key="scene-0-2-your-character">Choose Your Character</div>
+
+                    <div class="carousel">
+
+                        <div class="body">
+
+                            <div class="arrow arrow__left">
+                                <div class="arrow--image arrow--image__left"></div>
+                            </div>
+
+                            <div class="avatars">
+
+                                <div class="avatar avatar__previous">
+                                    <div class="avatar--image army-boy__standing"></div>
+                                </div>
+
+                                <div class="avatar avatar__current">
+                                    <div class="avatar--image young-girl__standing"></div>
+                                </div>
+
+                                <div class="avatar avatar__next">
+                                    <div class="avatar--image young-boy__standing"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="arrow arrow__right">
+                                <div class="arrow--image arrow--image__right"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="navigation">
+                            <div class="dot selected"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="textfield">
+                        <input data-i18next-key="scene-0-2-your-name"
+                               data-i18next-target-type="attr"
+                               data-i18next-target-value="placeholder"
+                               class="i18next"
+                               type="text"
+                               placeholder="Your Name (Person sharing the Good News)"
+                               style="text-align:center;transform: translate(0px,2px);"/>
+                    </div>
+
+                </div>
+
+                <div class="button button__submit black i18next shiftup"
+                     data-avatar-type="speaker"
+                     data-destination="scene-0-2"
+                     data-i18next-key="scene-0-2-next-button">
+                    NEXT
+                </div>
+
+                <div class="footer">
+                    <div class="button gear" data-menu="menu">
+                        <img src="images/gear_button.png"/>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-0-2" class="scene tappable" data-dom-cache="true">
+
+            <div class="content">
+
+                <div class="avatar-picker shiftup" data-avatar-type="listener">
+
+                    <div class="title i18next" data-i18next-key="scene-0-3-friend-character">Your Friend's Character</div>
+
+                    <div class="carousel">
+
+                        <div class="body">
+
+                            <div class="arrow arrow__left">
+                                <div class="arrow--image arrow--image__left"></div>
+                            </div>
+
+                            <div class="avatars">
+
+                                <div class="avatar avatar__previous">
+                                    <div class="avatar--image army-boy__standing"></div>
+                                </div>
+
+                                <div class="avatar avatar__current">
+                                    <div class="avatar--image young-girl__standing"></div>
+                                </div>
+
+                                <div class="avatar avatar__next">
+                                    <div class="avatar--image young-boy__standing"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="arrow arrow__right">
+                                <div class="arrow--image arrow--image__right"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="navigation">
+                            <div class="dot selected"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="textfield">
+                        <input data-i18next-key="scene-0-3-friend-name"
+                               data-i18next-target-type="attr"
+                               data-i18next-target-value="placeholder"
+                               class="i18next"
+                               type="text"
+                               placeholder="Your friend's name (Person listening to the Good News)"
+                               style="text-align:center;transform: translate(0px,2px);"/>
+                    </div>
+
+                </div>
+
+                <div class="button button__submit black i18next shiftup"
+                     data-avatar-type="listener"
+                     data-destination="scene-1-0"
+                     data-i18next-key="scene-0-1-enter-button">
+                    ENTER
+                </div>
+
+                <div class="footer">
+                    <div class="button gear" data-menu="menu">
+                        <img src="images/gear_button.png"/>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-1-0" class="scene tappable" data-dom-cache="true" data-next="scene-2-0">
+
+            <div id="scene-2-0nextscene">
+                <div class="transscene1"></div>
+                <div class="transscene2"></div>
+            </div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-1-0-beginning">
+                        IN THE BEGINNING, GOD CREATED THE HEAVENS AND THE EARTH.
+                    </div>
+                </div>
+                <img class="swipe-arrow" src="images/swipe-arrow.png">
+                <img class="swipe-hand" src="images/swipe-hand.png">
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-2-0" class="scene tappable" data-dom-cache="true" data-prev="scene-1-0" data-next="scene-2-1">
+
+            <div id="scene-1-0prevscene">
+                <div class="transscene1"></div>
+                <div class="transscene2"></div>
+            </div>
+
+            <div class="nextbg"></div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text hide">
+                    <div class="i18next t-body" data-i18next-key="scene-2-0-he">
+                        HE ALSO CREATED YOU AND I.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-2-1" class="scene tappable" data-dom-cache="true" data-prev="scene-2-0" data-next="scene-2-2">
+
+            <div class="prevbg"></div>
+            <div class="nextbg"></div>
+
+            <div class="wrapper">
+                <header>
+                    <div class="button home" data-destination="scene-0-0">
+                        <img src="images/home_button.png">
+                    </div>
+                </header>
+                <div class="god-header i18next" data-i18next-key="scene-2-0-god" style="z-index:1;"></div>
+            </div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-2-1-god">
+                        GOD LOVES US AND WANTS A RELATIONSHIP WITH US.
+                    </div>
+                </div>
+
+                <div class="verse-body hide i18next t-body" data-i18next-key="scene-2-2-and">
+                    AND THIS IS THE WAY TO HAVE ETERNAL LIFE - TO KNOW YOU, THE ONLY TRUE GOD, AND JESUS CHRIST,
+                    THE ONE YOU SENT TO EARTH.
+                </div>
+
+                <div class="verse i18next" data-i18next-key="scene-2-1-john">
+                    JOHN 17:3
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-2-2" class="scene tappable" data-dom-cache="true" data-prev="scene-2-1" data-next="scene-3-0">
+
+            <div class="prevbg"></div>
+            <div class="nextbg"><div></div><div></div></div>
+            <div class="currbg"><div></div><div></div></div>
+
+            <div class="wrapper">
+
+                <header>
+                    <div class="button home" data-destination="scene-0-0">
+                        <img src="images/home_button.png">
+                    </div>
+                </header>
+
+                <div class="god-header i18next" data-i18next-key="scene-2-0-god" style="z-index:1;"></div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-2-3-christianity">
+                        CHRISTIANITY IS NOT A RELIGION BUT A RELATIONSHIP WITH GOD. THIS RELATIONSHIP BRINGS US TRUE LOVE, JOY AND PEACE.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-3-0" class="scene tappable" data-dom-cache="true" data-prev="scene-2-2" data-next="scene-3-1">
+
+            <div class="currbg"><div></div><div></div></div>
+            <div class="prevbg"><div></div><div></div></div>
+            <div class="nextbg"></div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-3-0-our">
+                        OUR RELATIONSHIP WITH GOD IS BROKEN BECAUSE OF SIN.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-3-1" class="scene tappable" data-dom-cache="true" data-prev="scene-3-0" data-next="scene-3-2">
+
+            <div class="prevbg"></div>
+            <div class="nextbg"></div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-3-1-sin">
+                        SIN IS AS SIMPLE AS SELFISHNESS, LYING OR LUST TO AS SERIOUS AS STEALING, MURDER OR REBELLION TOWARDS GOD.
+                    </div>
+                </div>
+
+                <div class="verse-body hide i18next t-body" data-i18next-key="scene-3-1-for">
+                    FOR EVERYONE HAS SINNED; WE ALL FALL SHORT OF GOD'S GLORIOUS STANDARD.
+                </div>
+
+                <div class="verse i18next" data-i18next-key="scene-3-1-romans">
+                    ROMANS 3:23
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-3-2" class="scene tappable" data-dom-cache="true" data-prev="scene-3-1" data-next="scene-4-0">
+
+            <div class="prevbg"></div>
+            <div class="nextbg"></div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-3-2-because">
+                        BECAUSE OF SIN AND OUR BROKEN RELATIONSHIP WITH GOD THE FATHER,
+                        WE WILL NOT KNOW OUR TRUE PURPOSE IN LIFE. WE ARE ALSO UNCERTAIN OF OUR ETERNAL FUTURE.
+                    </div>
+                </div>
+
+                <div class="verse-body hide i18next t-body" data-i18next-key="scene-3-2-for">
+                    FOR THE PENALTY OF SIN IS DEATH, BUT THE FREE GIFT OF GOD IS ETERNAL LIFE THROUGH CHRIST JESUS OUR LORD.
+                </div>
+
+                <div class="verse i18next" data-i18next-key="scene-3-2-romans">
+                    ROMANS 6:23
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Added by Frank Grisafi 11/2/2017 -->
+        <!-- Used to determine last scene viewed -->
+        <input type="radio" id="scene-5-0prev" name="prevscene">
+        <input type="radio" id="scene-6-0prev" name="prevscene">
+        <input type="radio" id="scene-7-0prev" name="prevscene">
+        <!-- End of addition by Frank Grisafi 11/2/2017 -->
+
+
+        <div data-role="page" id="scene-4-0" class="scene tappable" data-dom-cache="true" data-prev="scene-3-2" data-next="scene-8-0">
+
+            <div class="prevbg"></div>
+            <div class="nextbg"></div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="header">
+
+                <div class="button-container">
+                    <div class="button black i18next remove-shadow" data-destination="scene-5-0" data-i18next-key="scene-4-0-success">
+                        SUCCESS
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <div class="button black i18next remove-shadow" data-destination="scene-6-0" data-i18next-key="scene-4-0-good">
+                        GOOD WORKS
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <div class="button black i18next remove-shadow" data-destination="scene-7-0" data-i18next-key="scene-4-0-religions">
+                        RELIGIONS AND<br>
+                        PHILOSOPHIES
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-4-0-we">
+                        WE TRY TO RECONCILE OUR RELATIONSHIP WITH GOD THROUGH MANY WAYS.
+                    </div>
+                </div>
+
+                <div class="button skip i18next" data-destination="scene-8-0" data-i18next-key="scene-4-0-skip-button">
+                    SKIP
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-5-0" class="scene tappable" data-dom-cache="true" data-prev="scene-4-0" data-next="scene-8-0">
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="header">
+
+                <!-- Added by Frank Grisafi 11/2/2017 -->
+                <div class="button-container">
+                    <div class="button black i18next" data-i18next-key="scene-4-0-success">
+                        SUCCESS
+                    </div>
+                </div>
+                <!-- End of addition by Frank Grisafi 11/2/2017 -->
+
+
+                <div class="button-container">
+                    <div class="button black i18next" data-destination="scene-6-0" data-i18next-key="scene-4-0-good">
+                        GOOD WORKS
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <div class="button black i18next" data-destination="scene-7-0" data-i18next-key="scene-4-0-religions">
+                        RELIGIONS AND<br>
+                        PHILOSOPHIES
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-5-0-some">
+                        SOME OF US TRY TO FIND HAPPINESS BY PURSUING SUCCESS, BUT IT DOESN'T MEND OUR BROKEN RELATIONSHIP WITH GOD.
+                    </div>
+                </div>
+
+                <div class="button skip i18next t-body" data-destination="scene-8-0" data-i18next-key="scene-4-0-skip-button">
+                    SKIP
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-6-0" class="scene tappable" data-dom-cache="true" data-prev="scene-4-0" data-next="scene-8-0">
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="header">
+
+                <div class="button-container">
+                    <div class="button black i18next" data-destination="scene-5-0" data-i18next-key="scene-4-0-success">
+                        SUCCESS
+                    </div>
+                </div>
+
+                <!-- Added by Frank Grisafi 11/2/2017 -->
+                <div class="button-container">
+                    <div class="button black i18next" data-i18next-key="scene-4-0-good">
+                        GOOD WORKS
+                    </div>
+                </div>
+                <!-- End of addition by Frank Grisafi 11/2/2017 -->
+
+
+
+
+                <div class="button-container">
+                    <div class="button black i18next" data-destination="scene-7-0" data-i18next-key="scene-4-0-religions">
+                        RELIGIONS AND<br>
+                        PHILOSOPHIES
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-6-0-some">
+                        SOME OF US TRY TO DO GOOD AND BE GOOD, BUT RELATIONSHIP WITH GOD CANNOT BE EARNED OR BOUGHT. IT IS A GIFT OF GOD.
+                    </div>
+                </div>
+
+                <div class="button skip i18next" data-destination="scene-8-0" data-i18next-key="scene-4-0-skip-button">
+                    SKIP
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-7-0" class="scene tappable" data-dom-cache="true" data-prev="scene-4-0" data-next="scene-8-0">
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="header">
+
+                <div class="button-container">
+                    <div class="button black i18next" data-destination="scene-5-0" data-i18next-key="scene-4-0-success">
+                        SUCCESS
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <div class="button black i18next" data-destination="scene-6-0" data-i18next-key="scene-4-0-good">
+                        GOOD WORKS
+                    </div>
+                </div>
+
+
+                <!-- Added by Frank Grisafi 11/2/2017 -->
+                <div class="button-container">
+                    <div class="button black i18next" data-i18next-key="scene-4-0-religions">
+                        RELIGIONS AND<br>
+                        PHILOSOPHIES
+                    </div>
+                </div>
+                <!-- End of addition by Frank Grisafi 11/2/2017 -->
+
+
+
+                <img id="gear-1" src="images/gear-1.png">
+                <img id="gear-2" src="images/gear-2.png">
+                <img id="gear-3" src="images/gear-3.png">
+                <img id="gear-4" src="images/gear-3.png">
+            </div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-7-0-some">
+                        SOME OF US TRY RELIGIONS OR PHILOSOPHIES BUT GOD IS LOOKING FOR A LOVING PERSONAL RELATIONSHIP.
+                    </div>
+                </div>
+
+                <div class="button skip i18next" data-destination="scene-8-0" data-i18next-key="scene-4-0-skip-button">
+                    SKIP
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-8-0" class="scene tappable" data-dom-cache="true" data-prev="scene-4-0" data-next="scene-8-2">
+
+            <div class="prevbg"></div>
+            <div class="nextbg"></div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="god-header i18next" data-i18next-key="scene-2-0-god" style="position:absolute; z-index:1;"></div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-8-0-all">
+                        ALL OUR EFFORTS ARE NOT ENOUGH TO MEND THIS BROKEN RELATIONSHIP. THE GOOD NEWS IS THAT GOD LOVES US SO MUCH THAT HE MADE THE FIRST MOVE.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-8-2" class="scene tappable" data-dom-cache="true" data-prev="scene-8-0" data-next="scene-9-0">
+
+            <!-- <div class="prevbg"></div> -->
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="god-header i18next" data-i18next-key="scene-2-0-god" style="position:absolute; z-index:1;"></div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="title i18next" data-i18next-key="scene-8-2-john">JOHN 3:16</div>
+                    <div class="i18next t-body" data-i18next-key="scene-8-2-for">
+                        FOR GOD SO LOVED THE WORLD THAT HE GAVE HIS ONLY BEGOTTEN SON, THAT WHOEVER BELIEVES IN HIM SHOULD NOT PERISH BUT HAVE EVERLASTING LIFE.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-9-0" class="scene tappable" data-dom-cache="true" data-prev="scene-8-2" data-next="scene-9-1">
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-9-0-jesus">
+                        JESUS CAME ON OUR BEHALF, AND PAID THE PENALTY OF OUR SINS, BY DYING ON THE CROSS. OUR SINS CAN NOW BE ERASED.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-9-1" class="scene tappable" data-dom-cache="true" data-prev="scene-9-0" data-next="scene-9-2">
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-9-1-i">
+                        I MADE A WONDERFUL AND LIFE-CHANGING DECISION TO HAVE A RELATIONSHIP WITH GOD.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-9-2" class="scene tappable" data-dom-cache="true" data-prev="scene-9-1" data-next="scene-10-0">
+
+            <div class="prevbg"></div>
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="button orange button-yes i18next" data-destination="scene-10-0" data-i18next-key="scene-9-2-yes-button">
+              <span style="transform: translate(1px,3px)">YES!</span>
+            </div>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-9-2-so">
+                        SO NOW, WOULD YOU LIKE TO JOIN ME AND HAVE YOUR OWN RELATIONSHIP WITH GOD?
+                    </div>
+                </div>
+
+                <div class="button skip i18next" data-destination="scene-9-3" data-i18next-key="scene-4-0-skip-button">
+                    SKIP
+                </div>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-9-3" class="scene tappable" data-dom-cache="true" data-prev="scene-9-2">
+
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+
+                <div class="text">
+                    <div class="i18next t-body" data-i18next-key="scene-10-0b-can">
+                        CAN I PRAY A PRAYER OF BLESSING FOR YOU?
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-10-0" class="scene" data-dom-cache="true" data-prev="scene-9-2" data-next="scene-11-0">
+
+            <div id="bg-door-opened" class="scene ui-page ui-page-active bg-door-opened"></div>
+            <div id="scrolling-bg"></div>
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <!-- BC -->
+            <div class="content">
+                <div class="text">
+                    <div class="title i18next" data-i18next-key="scene-10-1a-prayer-button" style="transform: translate(0px,-20px);">PRAYER</div>
+
+                    <div class="i18next t-body" data-i18next-key="scene-10-1a-dear">
+                      <div style="transform:scale(1.2) translate(0px,-15px);">
+                        DEAR FATHER GOD, I ADMIT THAT I AM A SINNER,
+                        <br>AND I ASK FOR YOUR FORGIVENESS. I BELIEVE THAT
+                        <br>JESUS CHRIST DIED FOR ME ON THE CROSS
+                        <br>AND ROSE AGAIN.<br>
+                        <br>I CONFESS THAT JESUS IS MY LORD AND SAVIOR.
+                        <br>HOLY SPIRIT, HELP ME TO OBEY AND FOLLOW GOD.
+                        <br>CHANGE ME FROM THE INSIDE OUT. IN THE NAME
+                        <br>OF JESUS, AMEN.
+                      </div>
+                    </div>
+
+                    <div class="button orange i18next" data-destination="scene-11-0" data-i18next-key="scene-10-1a-amen-button">AMEN</div>
+                </div>
+            </div>
+            <!-- /BC -->
+        </div>
+
+        <div data-role="page" id="scene-11-0" class="scene tappable" data-dom-cache="true" data-prev="scene-10-0" data-next="scene-11-1">
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="text">
+                    <div class="title i18next" data-i18next-key="scene-11-congratulations">CONGRATULATIONS!!!</div>
+
+                    <div class="i18next" data-i18next-key="scene-11-you">YOU'VE MADE THE BEST DECISION IN YOUR LIFE!</div>
+                </div>
+            </div>
+<div class="demo">
+</div>
+        </div>
+
+        <div data-role="page" id="scene-11-1" class="scene tappable" data-dom-cache="true" data-prev="scene-11-0">
+            <header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="text">
+                    <div class="title i18next" data-i18next-key="scene-12-attend">ATTEND A GOOD CHURCH REGULARLY!</div>
+
+                    <div class="subtitle i18next t-body" data-i18next-key="scene-12-you">
+                        YOU ARE NOW LIKE A BABY CHRISTIAN, YOU MUST HAVE A SPIRITUAL FAMILY AND HOME.
+                        <br>
+                        <br>
+                        WOULD YOU LIKE TO JOIN ME IN CHURCH THIS COMING WEEKEND?
+                    </div>
+
+                    <div class="tip i18next" data-i18next-key="scene-12-what">
+                        WHAT'S NEXT?
+                    </div>
+
+                    <div class="button right-arrow" data-destination="scene-13-0"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="scene-13-0" class="scene tappable padding-top-1em" data-dom-cache="true">
+
+            <!--<header>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </header>-->
+
+            <div id="bible-apps-wrapper">
+                <h4 class="highlight i18next moreorange" data-i18next-key="scene-13-read">READ THE BIBLE</h4>
+
+                <p class="i18next" data-i18next-key="scene-13-we">We recommend that you start with the gospel of Luke. Go buy a bible or you can check out the following resources.</p>
+                <div style="height: 3em;"></div>
+                <h4 class="highlight i18next moreorange" data-i18next-key="scene-13-free">FREE BIBLE APPS</h4>
+
+                <ul class="w-100 center">
+                    <li class="inline-block w-48">
+                        <a id="bible-life-church" href="https://itunes.apple.com/sg/app/bible/id282935706" target="_blank">
+                            <img src="images/bible-1.png">
+                            <p style="font-family: 'UniversLight';">Bible - by Life Church</p>
+                        </a>
+                    </li>
+
+                    <li class="inline-block w-48">
+                        <a id="bible-olive-tree" href="https://itunes.apple.com/us/app/bible-daily-reading-study-bible-by-olive-tree/id332615624" target="_blank">
+                            <img src="images/bible-2.png">
+                            <p style="font-family: 'UniversLight';">Bible - by Olive Tree</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <footer>
+                <div class="button home" data-destination="scene-0-0">
+                    <img src="images/home_button.png">
+                </div>
+            </footer>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
+        <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
+        <script type="text/javascript" src="js/i18next-8.4.3.min.js"></script>
+        <script type="text/javascript" src="js/animation.js"></script>
+        <script type="text/javascript" src="i18n/language.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="js/fireworks.js"></script>
+        <script type="text/javascript" src="js/confetti.js"></script>
+        <script type="text/javascript" src="js/flare.js"></script>
+        <script type="text/javascript" src="js/flare2.js"></script>
+        <script>
+$(document).ready(function(){
+  $('.owl-carousel').owlCarousel({
+    stagePadding: 40,
+    margin:10,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+
+document.addEventListener("deviceready", function(){
+	var autoHideNavigationBar = false;
+	window.navigationbar.setUp(autoHideNavigationBar);
+}, false);
+
+window.navigationbar.hide();
+
+
+});
+
+
+</script>
+    </body>
+</html>

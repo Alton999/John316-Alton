@@ -1,0 +1,66 @@
+DEVICE_BUILD_OUTPUT   = "#{Dir.getwd}/../platforms/ios/build/device"
+DEVICE_DSYM_PATH      = "#{DEVICE_BUILD_OUTPUT}/John\ 316.app.dSYM"
+DEVICE_IPA_PATH       = "#{DEVICE_BUILD_OUTPUT}/John\ 316.ipa"
+
+HOCKEY_API_TOKEN      = "a13fe0da2ac2438ba8e56518529f7ac7"
+
+fastlane_version "2.75.1"
+
+default_platform :ios
+
+platform :ios do
+  desc "Upload to Test Flight"
+  lane :upload_apple_testflight do
+    sh("cordova build ios --device --release")
+
+    testflight(
+      skip_waiting_for_build_processing: true,
+      skip_submission: true,
+      team_id: "2035551",
+      ipa: DEVICE_IPA_PATH
+    )
+  end
+
+  desc "Upload a build to Hockey App"
+  lane :upload_to_hockey do
+    sh("cordova build ios --device --debug")
+
+    UI.abort_with_message!("IPA not found!") unless File.exist?(DEVICE_IPA_PATH)
+    UI.abort_with_message!("DSYM not found!") unless File.exist?(DEVICE_DSYM_PATH)
+
+    new_ipa_path = replace_spaces_with_underscores(DEVICE_IPA_PATH)
+
+    hockey(
+      api_token: HOCKEY_API_TOKEN,
+      ipa: new_ipa_path,
+      dsym: zip_dsym_folder,
+      notify: "1",
+      status: "2"
+    )
+  end
+
+  def zip_dsym_folder
+    new_dsym_path     = replace_spaces_with_underscores(DEVICE_DSYM_PATH)
+    new_dsym_zip_path = "#{new_dsym_path}.zip"
+
+    zip(
+      path: new_dsym_path,
+      output_path: new_dsym_zip_path
+    )
+
+    new_dsym_zip_path
+  end
+
+  def replace_spaces_with_underscores(current_path)
+    filename = File.basename(current_path, File.extname(current_path))
+    dirname = File.dirname(current_path)
+    new_path = dirname + "/" + filename.gsub(" ", "_") + File.extname(current_path)
+
+    puts "Renaming '#{current_path}' to '#{new_path}'"
+
+    File.rename(current_path, new_path)
+
+    new_path
+  end
+end
+

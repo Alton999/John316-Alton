@@ -1,0 +1,2356 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+:lang(en) { font-family: 'UniversLight', Arial, Helvetica, sans-serif; }
+:lang(zh) { font-family: 'SimHei'; }
+:lang(th) .god-header { font-size: 3.5em; margin-top: .3em; }
+.menu--language-list li[lang="ru"] a {
+    font-weight: 100;
+}
+
+html { overflow: hidden; }
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+    background-color: #000 !important;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+@font-face {
+    font-family: 'SimHei';
+    src: url("../fonts/simhei.ttf");
+}
+
+@font-face {
+    font-family: 'UniversMediumUltraCondensed';
+    src: url("../fonts/UniversMedium-59UltraCond.ttf");
+}
+
+@font-face {
+    font-family: 'UniversBoldCondensed';
+    src: url("../fonts/UniversBold-67BoldCondensed.ttf");
+}
+
+@font-face {
+    font-family: 'UniversLight';
+    src: url("../fonts/UniversLight.otf");
+}
+
+/* Common styles */
+.font-color-white { color: #fff !important; }
+.text-center { text-align: center;}
+.padding-top-1em { padding-top: 1em !important;}
+.positon-absolute { position: absolute;}
+.fullscreen {width:100%; height: 100%}
+
+#bg-4,
+#bg-5{ padding-top:1em; }
+
+#bg-4 ul { padding-left: 0; }
+#bg-4 li img { margin-left: 3em; vertical-align: middle; }
+#bg-4 li { display: inline-block; }
+.social-text {
+    width: 7em;
+    position: relative;
+}
+.social-text div {
+    text-align: right;
+    position: absolute;
+    right: 0;
+    display: inline-block;
+}
+
+#bg-5 ul { padding: 0; }
+#bg-5 ul li { list-style-type: none; }
+#bg-5 li img { width: 100%; }
+
+
+/* Set the background image sources */
+@keyframes background-slide-up {
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
+}
+
+@keyframes content-slide-up {
+    from { bottom: -100%; }
+    to { bottom: 0; }
+}
+
+#scene-0-0 {
+    background-image: url("../images/backgrounds/0.0 bg-dark-sky.jpg");
+    background-size: 100% 200%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
+    overflow: hidden;
+}
+
+#scene-0-0.animate, #scene-0-0.animate .content.animate {
+    animation-delay: 5s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+
+#scene-0-0.animate { animation-name: background-slide-up; }
+#scene-0-0.animate .content.animate { animation-name: content-slide-up; }
+
+#scene-0-1, #scene-0-2 { background-image: url("../images/backgrounds/0.0 Opening Page.png"); }
+#scene-1-0 { background-image: url("../images/backgrounds/1.0 In the beginning, God....png"); }
+#scene-2-0 { background-image: url("../images/backgrounds/2.0 He also created you and I..png"); }
+#scene-2-1 { background-image: url("../images/backgrounds/2.1 (640x1136).jpg"); }
+#scene-2-2 { background-image: url("../images/backgrounds/2.2 (640x1136).jpg"); }
+#scene-3-0 { background-image: url("../images/backgrounds/3.0 But our relationship....png"); }
+#scene-3-1 { background-image: url("../images/backgrounds/3.1 What is Sin_.png"); }
+#scene-3-2 { background-image: url("../images/backgrounds/3.2 Romans 3_23....png"); }
+#scene-4-0 { background-image: url("../images/backgrounds/4.0 But then our hearts....png"); }
+#scene-5-0 { background-image: url("../images/backgrounds/5.0 Some people try to find....png"); }
+#scene-6-0 { background-image: url("../images/backgrounds/6.0 Some people try to do....png"); }
+#scene-7-0 { background-image: url("../images/backgrounds/7.0 Some others try....png"); }
+#scene-8-0 { background-image: url("../images/backgrounds/8.0 (640x1136).jpg"); }
+#scene-8-2 { background-image: url("../images/backgrounds/8.2 (640x1136).jpg"); }
+#scene-9-0 { background-image: url("../images/backgrounds/9.0 I made a wonderful....jpg"); }
+#scene-9-1 { background-image: url("../images/backgrounds/9.0 I made a wonderful....jpg"); }
+#scene-9-2, #scene-9-3 { background-image: url("../images/backgrounds/9.2 Yes_.jpg"); }
+#scene-10-0 {
+    background-image: url("../images/backgrounds/9.2 Yes_.jpg");
+    overflow: hidden;
+}
+#scrolling-bg.start-scrolling {
+    /* BC */
+    background-image: url("../images/backgrounds/10.1 Sinners Prayer.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    animation-name: scene-10-bg-move-up;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+@keyframes scene-10-bg-move-up {
+    from { top: 41.1%; }
+    to { top: 0%; }
+}
+
+.bg-door-opened {
+    /* BC */
+    /*background-image: url("../images/backgrounds/earth-long.jpg");*/
+    background-image: url("../images/backgrounds/10.0 YES_-2.jpg");
+    animation: fade-in 2s;
+}
+@keyframes fade-in {
+    0% { opacity:0; }
+    25% { opacity:0.25; }
+    50% { opacity:0.5; }
+    75% { opacity:0.75; }
+    100% { opacity:1; }
+}
+
+/* BC */
+@keyframes bgFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes bgFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* BC */
+/*#scene-10-1 { background-image: url("../images/backgrounds/10.1 Sinners Prayer.png"); }*/
+#scene-10-1 {
+    background-image: url("../images/backgrounds/10.1 Sinners Prayer.jpg");
+    /*-webkit-animation: bgFadeIn 9s;
+    animation: bgFadeIn 9s;*/
+}
+#scene-11-0, #scene-11-1 { background-image: url("../images/backgrounds/10.1 Sinners Prayer.jpg"); }
+#scene-13-0 { background-image: url("../images/backgrounds/13.0 Resources.png"); }
+
+.hide {
+    display: none !important;
+}
+
+/* Background settings */
+.stage {
+    position: absolute;
+    top: 32%;
+    bottom: 21%;
+    left: 10%;
+    right: 10%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: center;
+
+    z-index: 1;
+
+    overflow: hidden;
+}
+
+.avatar {
+    width: 45%;
+    height: 85%;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.avatar__left {
+    left: 6%;
+}
+
+.avatar__right {
+    right: 6%;
+}
+
+.avatar--name {
+    position: relative;
+    top: -21%;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.scene-1-0 .avatar__right .avatar--name,
+.scene-2-0 .avatar__right .avatar--name,
+.scene-2-1 .avatar__right .avatar--name,
+.scene-2-2 .avatar__right .avatar--name,
+.scene-3-0 .avatar__right .avatar--name,
+.scene-3-1 .avatar__right .avatar--name,
+.scene-3-2 .avatar__right .avatar--name,
+.scene-4-0 .avatar__right .avatar--name,
+.scene-5-0 .avatar__right .avatar--name,
+.scene-6-0 .avatar__right .avatar--name,
+.scene-7-0 .avatar__right .avatar--name,
+.scene-8-0 .avatar__right .avatar--name,
+.scene-8-2 .avatar__right .avatar--name,
+.scene-9-0 .avatar__right .avatar--name,
+.scene-9-1 .avatar__right .avatar--name,
+.scene-9-2 .avatar__right .avatar--name,
+.scene-9-3 .avatar__right .avatar--name,
+.scene-10-0 .avatar__right .avatar--name,
+.scene-10-1 .avatar__right .avatar--name {
+    top: -6%;
+}
+
+/* CSS for the PDF guides */
+.header-alignment {
+    text-align: center;
+}
+.main-header {
+    display: inline-flex;
+    font-size: 1em;
+    color: #2c3e50;
+}
+
+.footer {
+    font-size: 0.5em;
+    text-align: right;
+}
+
+.footer-p {
+    margin-bottom: -3%;
+    margin-right: 5%;
+}
+
+.bullet{
+    float:left;
+    margin-right: 5px;
+}
+
+.blue-bg {
+    background-color: #2980b9;
+    color: white;   
+    padding: 5px;
+}
+
+.sub-heading {
+    margin-top: -3%;
+    font-size: 1.25em;
+    padding-left: 5%
+}
+
+.dark-font {
+    color: #3498db;
+}
+
+.resources {
+    background-color: #3498db;
+    color: white;
+    padding: 0.0125%;
+    margin-bottom: 10%;
+}
+
+.resource-heading {
+    margin-left: 7%;
+    margin-bottom: -4%;
+}
+
+.resource-item {
+    margin-left: 7%;
+}
+
+/* CSS for the PDF guides */
+
+
+.avatar--prop__cross {
+    background-image: url("../images/cross.png");
+    /*background-size: contain;*/
+    background-size: 23px 29px !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    top: -18%;
+    height: 15%;
+    width: 15%;
+}
+
+.avatar--prop__heart {
+    position: absolute;
+    width: 10%;
+    height: 8%;
+}
+
+.army-boy .avatar--prop__heart {
+    left: 47%;
+    top: 39%;
+}
+
+.family-man .avatar--prop__heart {
+    left: 47%;
+    top: 41%;
+}
+
+.family-woman .avatar--prop__heart {
+    left: 52%;
+    top: 42%;
+}
+
+.working-man .avatar--prop__heart {
+    left: 50%;
+    top: 36%;
+}
+
+.working-woman .avatar--prop__heart {
+    left: 45%;
+    top: 39%;
+}
+
+.old-man .avatar--prop__heart {
+    left: 45%;
+    top: 39%;
+}
+
+.old-woman .avatar--prop__heart {
+    left: 50%;
+    top: 39%;
+}
+
+.young-boy .avatar--prop__heart {
+    left: 46%;
+    top: 43%;
+}
+
+.young-girl .avatar--prop__heart {
+    left: 49%;
+    top: 43%;
+}
+
+.scene-5-0 .army-boy .avatar--prop__heart {
+    left: 49%;
+    top: 39%;
+}
+
+.scene-5-0 .family-man .avatar--prop__heart {
+    left: 49%;
+    top: 41%;
+}
+
+.scene-5-0 .family-woman .avatar--prop__heart {
+    left: 51%;
+    top: 42%;
+}
+
+.scene-5-0 .working-man .avatar--prop__heart {
+    left: 50%;
+    top: 36%;
+}
+
+.scene-5-0 .working-woman .avatar--prop__heart {
+    left: 48%;
+    top: 37%;
+}
+
+.scene-5-0 .old-man .avatar--prop__heart {
+    left: 47%;
+    top: 39%;
+}
+
+.scene-5-0 .old-woman .avatar--prop__heart {
+    left: 50%;
+    top: 38%;
+}
+
+.scene-5-0 .young-boy .avatar--prop__heart {
+    left: 48%;
+    top: 43%;
+}
+
+.scene-5-0 .young-girl .avatar--prop__heart {
+    left: 49%;
+    top: 43%;
+}
+
+.good-works-lady .avatar--prop__heart {
+    width: 20%;
+    top: 36%;
+    left: 42%;
+}
+
+
+@keyframes pulse_animation {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.1); }
+    40% { transform: scale(1.2); }
+    50% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+    70% { transform: scale(1.1); }
+    80% { transform: scale(1.2); }
+    100% { transform: scale(1.1); }
+}
+
+.avatar--prop__heart.pink.pulse {
+    animation-name: pulse_animation;
+    animation-duration: 5000ms;
+    transform-origin:70% 70%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.avatar--prop__heart.pink {
+    background-image: url("../images/pink_heart.png");
+}
+
+.avatar--prop__heart.white {
+    background-image: url("../images/white_heart.png");
+}
+
+.scene-5-0 .avatar--prop__heart {
+    width: 5%;
+}
+
+.army-boy .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 22%;
+    right: 28%;
+}
+
+.family-man .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 23%;
+    right: 64%;
+}
+
+.family-woman .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 21%;
+    right: 34%;
+}
+
+.old-man .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 25%;
+    right: 20%;
+}
+
+.old-woman .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 25%;
+    right: 30%;
+}
+
+.working-man .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 19%;
+    right: 66%;
+}
+
+.working-woman .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 24%;
+    right: 68%;
+}
+
+.young-boy .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 24%;
+    right: 32%
+}
+
+.young-girl .avatar--prop__first-aid-box {
+    position: absolute;
+    top: 20%;
+    right: 64%;
+}
+
+.avatar--prop__first-aid-box {
+    background-image: url("../images/first_aid_box.png");
+    position: relative;
+    width: 30%;
+    height: 100%;
+    z-index: 1;
+}
+
+.scene { background-size: cover; }
+.avatar, .prop { background-size: contain; }
+
+.scene, .avatar, .npc, .dot, .prop {
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.scene-5-0.stage,
+.scene-6-0.stage,
+.scene-9-0.stage,
+.scene-9-1.stage,
+.scene-9-2.stage,
+.scene-9-3.stage,
+.scene-10-0.stage {
+    /*top: 0;*/
+    overflow: visible;
+}
+
+.scene-5-0.avatar__left {
+    /*height: 50%;
+
+    position: absolute;
+    top: 46%;
+    left: -31%;
+    right: 8%;*/
+    left: -5px;
+}
+
+.scene-5-0.avatar__right {
+    /*height: 50%;
+
+    position: absolute;
+    top: 27%;
+    bottom: 32%;
+    left: 0;
+    right: 21%;
+    top: -130px;
+    left: -64px;*/
+}
+
+.scene-6-0.avatar__left {
+    left: -30%;
+}
+
+.scene-6-0.avatar__right {
+    right: 35%;
+}
+
+#scene-8-2 .content {
+    top: 75%;
+    bottom: 5%;
+}
+
+#scene-9-2 .button-yes {
+    animation: fade-in 3s;
+}
+
+/*.scene-9-0.stage,
+.scene-9-1.stage,
+.scene-9-2.stage,
+.scene-9-3.stage,
+.scene-10-0.stage,
+.scene-10-1.stage,
+.scene-11-0.stage,
+.scene-11-1.stage {
+    left: 0;
+    right: 0;
+}*/
+
+.scene-11-0.stage,
+.scene-11-1.stage {
+    /*top: 7%;
+    bottom: 53%;*/
+    /* BC */
+    top: 0;
+    bottom: 53%;
+    /*width: 75%;
+    height: 45%;
+    margin: 0 auto;*/
+}
+
+.scene-9-0.avatar__left {
+    animation-name: walking, scene-9-0-speaker-move-left;
+    animation-duration: 1s, 3s;
+    animation-delay: 0s, 0s;
+    animation-iteration-count: 3, 1;
+    animation-timing-function: step-start, linear;
+    animation-fill-mode: none, forwards;
+}
+
+.scene-9-0.avatar__right {
+    animation-name: walking, scene-9-0-listener-move-left;
+    animation-duration: 1s, 3s;
+    animation-delay: 0s, 0s;
+    animation-iteration-count: 3, 1;
+    animation-timing-function: step-start, linear;
+    animation-fill-mode: none, forwards;
+}
+
+.scene-9-0.jesus {
+    animation: fade-in 1s;
+}
+
+@keyframes scene-9-0-speaker-move-left {
+    to { left: -20%; }
+}
+
+@keyframes scene-9-0-listener-move-left {
+    to { right: 50%; }
+}
+
+/* BC */
+.scene-10-1.stage {
+    top: 0;
+    bottom: 53%;
+    overflow: visible;
+}
+
+.scene-9-1.avatar__left {
+    left: -20%;
+}
+
+.scene-9-2.avatar__left,
+.scene-10-0.avatar__left {
+    left: 69%;
+}
+
+.scene-9-2.jesus,
+.scene-10-0.jesus {
+    left: 46%;
+}
+
+.scene-9-1.avatar__right,
+.scene-9-2.avatar__right,
+.scene-10-0.avatar__right {
+    right: 50%;
+}
+
+.scene-9-3.avatar__left {
+    /*left: 62%;*/
+    position: absolute;
+    left: 82%;
+    top: 15%;
+}
+
+.scene-10-1.avatar__left,
+.scene-11-0.avatar__left,
+.scene-11-1.avatar__left {
+    left: 32%;
+}
+
+.scene-9-2.avatar__left,
+.scene-9-3.avatar__left,
+.scene-10-0.avatar__left,
+.scene-10-1.avatar__left,
+.scene-11-0.avatar__left,
+.scene-11-1.avatar__left {
+    transform: scale(-1,1);
+    -webkit-transform: scale(-1,1);
+}
+
+.scene-9-2.avatar__left .avatar--name,
+.scene-9-3.avatar__left .avatar--name,
+.scene-10-0.avatar__left .avatar--name,
+.scene-10-1.avatar__left .avatar--name,
+.scene-11-0.avatar__left .avatar--name,
+.scene-11-1.avatar__left .avatar--name {
+    transform: scale(-1,1);
+    -webkit-transform: scale(-1,1);
+}
+
+.scene-9-3.avatar__right,
+.scene-10-1.avatar__right,
+.scene-11-0.avatar__right,
+.scene-11-1.avatar__right {
+    /*right: 50%;*/
+    position: absolute;
+    right: 60%;
+    top: 15%;
+}
+
+.scene-9-3.jesus {
+    left: 40%;
+    position: absolute;
+}
+
+.scene-10-1.jesus,
+.scene-11-0.jesus,
+.scene-11-1.jesus {
+    left: 20%;
+}
+
+#scene-0-0 .content {
+    top: auto;
+    bottom: 0;
+    height: 100%;
+    justify-content: space-between;
+    margin: 0;
+    bottom: -100%;
+    position: absolute;
+}
+
+#scene-0-1 .content,
+#scene-0-2 .content {
+    top: 15%;
+    justify-content: space-evenly;
+    margin: 0;
+}
+
+#scene-0-0 .content .button.black {
+    top: 14%;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+#scene-0-1 .content .button.black,
+#scene-0-2 .content .button.black {
+    width: 28%;
+    height: 20%;
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    font-size: 75%;
+}
+
+#scene-0-0-2 .bg-dark {
+    background: #000;
+}
+#scene-0-0-2 a {
+    margin-top: .5em;
+    margin-left: 1em;
+    font-size: 1em;
+    text-decoration: none;
+    text-shadow: none;
+}
+#scene-0-0-2 .content {
+    top: 20%;
+}
+#scene-0-0-2 img {
+    width: 100%;
+}
+
+.god-header {
+    font-size: 5em;
+    font-family: 'UniversMediumUltraCondensed', Arial, Helvetica, sans-serif;
+    text-shadow: none;
+}
+
+#scene-2-1 .wrapper,
+#scene-2-2 .wrapper {
+    position: relative;
+}
+
+#scene-2-1 .god-header,
+#scene-2-2 .god-header {
+    position: absolute;
+    top: 5%;
+}
+
+#scene-8-0 .god-header,
+#scene-8-2 .god-header {
+    line-height: 2em;
+}
+
+#scene-2-1 .god-header,
+#scene-2-2 .god-header,
+#scene-8-0 .god-header,
+#scene-8-2 .god-header {
+    width: 100%;
+    text-align: center;
+}
+
+#scene-1-0 .content {
+    top: 25%;
+}
+
+#scene-1-0 .content .text {
+    align-items: flex-start;
+    justify-content: initial;
+}
+
+#scene-1-0 .wrapper {
+    width: 100%;
+    height: 20%;
+
+    margin-bottom: 2em;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+#scene-1-0 .wrapper .swipe {
+    background-image: url("../images/swipe.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.5;
+
+    width: 50%;
+    height: 100%;
+}
+
+#scene-5-0 .header {
+    z-index: 2;
+}
+
+#scene-8-2 .content .text {
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+#scene-10-1 .content {
+    top: 50%;
+    /* BC */
+    /*font-size: 0.9em;*/
+    margin: 0 0.8em;
+}
+
+#scene-10-0 .content .text,
+#scene-10-1 .content .text {
+    /* BC */
+    /*justify-content: space-around;*/
+    font-size: 0.9em;
+}
+
+#scene-10-0 .content .button,
+#scene-10-1 .content .button,
+#scene-11-1 .content .button {
+    width: 6em;
+    height: 6em;
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    color: #fff;
+}
+
+#scene-8-2 .content .text .title,
+#scene-10-0 .content .text .title,
+#scene-10-1 .content .text .title,
+#scene-11-0 .content .text .title,
+#scene-11-1 .content .text .title {
+    font-family: 'UniversBoldCondensed', Arial, Helvetica, sans-serif;
+    color: #ffff57;
+}
+
+#scene-11-0 .content,
+#scene-11-1 .content {
+    top: 48%;
+    font-size: 1.9em;
+}
+
+#scene-11-0 .content {
+    bottom: 20%;
+}
+
+#scene-11-1 .content .text .title {
+    font-size: 80%;
+}
+
+#scene-11-1 .content .subtitle {
+    font-size: 0.6em;
+}
+
+#scene-11-0 .content .text,
+#scene-11-1 .content .text {
+    justify-content: space-between;
+}
+
+#scene-11-1 .content .subtitle,
+#scene-11-1 .content .tip {
+    margin-top: 1em;
+}
+
+#scene-11-1 .content .tip {
+    font-size: 1em;
+    color: #ffff57;
+}
+
+#scene-13-0 {
+    color: #fff;
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    text-shadow: none;
+}
+
+#scene-13-0 .wrapper {
+    margin-top: 4em;
+    padding: 0 1em;
+}
+
+#scene-13-0 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#scene-13-0 .highlight {
+    color:#f7e118;
+    font-family: 'UniversBoldCondensed', Arial, Helvetica, sans-serif;
+    margin: .5em 1em;
+}
+
+#scene-13-0 p {
+    margin: 0 1em;
+}
+
+
+#scene-13-0 .w-100 {width: 100%;}
+#scene-13-0 .w-48 {width: 48%;}
+
+#scene-13-0 .center {
+    display:block;
+    margin:0 auto;
+}
+#scene-13-0 .inline-block {
+    display:inline-block;
+    text-align:center;
+}
+#scene-13-0 ul { padding:0; display:table;}
+#scene-13-0 ul li {list-style:none;}
+
+@keyframes walking {
+    0%   { background-position: 25% 100%;     }
+    3%   { background-position: 12.5% 100%;   }
+    7%   { background-position: 0 100%;       }
+    10%  { background-position: 100% 66.66%;  }
+    13%  { background-position: 100% 33.33%;  }
+    17%  { background-position: 100% 0;       }
+    20%  { background-position: 87.5% 66.66%; }
+    23%  { background-position: 87.5% 33.33%; }
+    27%  { background-position: 87.5% 0;      }
+    30%  { background-position: 75% 66.66%;   }
+    33%  { background-position: 62.5% 66.66%; }
+    36%  { background-position: 50% 66.66%;   }
+    40%  { background-position: 37.5% 66.66%; }
+    43%  { background-position: 25% 66.66%;   }
+    47%  { background-position: 12.5% 66.66%; }
+    50%  { background-position: 0 66.66%;     }
+    53%  { background-position: 75% 33.33%;   }
+    57%  { background-position: 75% 0;        }
+    60%  { background-position: 62.5% 33.33%; }
+    63%  { background-position: 62.5% 0;      }
+    66%  { background-position: 50% 33.33%;   }
+    70%  { background-position: 37.5% 33.33%; }
+    73%  { background-position: 25% 33.33%;   }
+    77%  { background-position: 12.5% 33.33%; }
+    80%  { background-position: 0 33.33%;     }
+    83%  { background-position: 50% 0;        }
+    87%  { background-position: 37.5% 0;      }
+    90%  { background-position: 25% 0;        }
+    93%  { background-position: 12.5% 0;      }
+    100% { background-position: 0 0;          }
+}
+
+@keyframes scene-9-1-walking {
+    0%   { background-position: 25% 100%;     }
+    3%   { background-position: 12.5% 100%;   }
+    7%   { background-position: 0 100%;       }
+    10%  { background-position: 100% 66.66%;  }
+    13%  { background-position: 100% 33.33%;  }
+    17%  { background-position: 100% 0;       }
+    20%  { background-position: 87.5% 66.66%; }
+    23%  { background-position: 87.5% 33.33%; }
+    27%  { background-position: 87.5% 0;      }
+    30%  { background-position: 75% 66.66%;   }
+    33%  { background-position: 62.5% 66.66%; }
+    36%  { background-position: 50% 66.66%;   }
+    40%  { background-position: 37.5% 66.66%; }
+    43%  { background-position: 25% 66.66%;   }
+    47%  { background-position: 12.5% 66.66%; }
+    50%  { background-position: 0 66.66%;     }
+    53%  { background-position: 75% 33.33%;   }
+    57%  { background-position: 75% 0;        }
+    60%  { background-position: 62.5% 33.33%; }
+    63%  { background-position: 62.5% 0;      }
+    66%  { background-position: 50% 33.33%;   }
+    70%  { background-position: 37.5% 33.33%; }
+    73%  { background-position: 25% 33.33%;   }
+    77%  { background-position: 12.5% 33.33%; }
+    80%  { background-position: 0 33.33%;     }
+    83%  { background-position: 50% 0;        }
+    87%  { background-position: 37.5% 0;      }
+    90%  { background-position: 25% 0;        }
+    93%  { background-position: 12.5% 0;      }
+    100% { background-position: 0 0;          }
+}
+
+.army-boy { background-image: url("../images/avatars/sprites/army_boy.png"); }
+.family-man { background-image: url("../images/avatars/sprites/family_man.png"); }
+.family-woman { background-image: url("../images/avatars/sprites/family_woman.png"); }
+.old-man { background-image: url("../images/avatars/sprites/old_man.png"); }
+.old-woman { background-image: url("../images/avatars/sprites/old_woman.png"); }
+.working-man { background-image: url("../images/avatars/sprites/working_man.png"); }
+.working-woman { background-image: url("../images/avatars/sprites/working_woman.png"); }
+.young-boy { background-image: url("../images/avatars/sprites/young_boy.png"); }
+.young-girl { background-image: url('../images/avatars/sprites/young_girl.png'); }
+
+.army-boy, .family-man, .family-woman, .old-man, .old-woman, .working-man, .working-woman, .young-boy, .young-girl {
+    background-size: 900% 400%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.army-boy__walking,
+.family-man__walking,
+.family-woman__walking,
+.old-man__walking,
+.old-woman__walking,
+.working-man__walking,
+.working-woman__walking,
+.young-boy__walking,
+.young-girl__walking {
+    animation-name: walking;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: step-start;
+}
+
+.army-boy__standing { background-image: url("../images/avatars/standing/army_boy.png"); }
+.family-man__standing { background-image: url("../images/avatars/standing/family_man.png"); }
+.family-woman__standing { background-image: url("../images/avatars/standing/family_woman.png"); }
+.old-man__standing { background-image: url("../images/avatars/standing/old_man.png"); }
+.old-woman__standing { background-image: url("../images/avatars/standing/old_woman.png"); }
+.working-man__standing { background-image: url("../images/avatars/standing/working_man.png"); }
+.working-woman__standing { background-image: url("../images/avatars/standing/working_woman.png"); }
+.young-boy__standing { background-image: url("../images/avatars/standing/young_boy.png"); }
+.young-girl__standing { background-image: url("../images/avatars/standing/young_girl.png"); }
+
+.scene-5-0.avatar__right {
+    animation-name: walking;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+    animation-timing-function: step-start;
+    transform: translate(-30%, -55%);
+    transition: all 3s;
+}
+
+.walk-right {
+    animation-name: walking;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+    animation-timing-function: step-start;
+    transform: translate(40%,0);
+    transition: all 2s;
+}
+
+.move-left-listener {
+    transform: translateX(-11%);
+    transition: all 1s;
+}
+
+.move-left-speaker {
+    transform: translateX(-32%) scale(-1, 1) !important;
+    transition: all 1s;
+}
+
+.move-left-jesus {
+    transform: translateX(-43.4%);
+    transition: all 1s;
+}
+
+.move-up-listener {
+    transform: translate(-11%,-80%);
+    transition: all 1.5s;
+}
+
+.move-up-speaker {
+    transform: translate(-32%,-80%) scale(-1, 1) !important;
+    transition: all 1.5s;
+}
+
+.move-up-jesus {
+    transform: translate(-43.4%,-74%);
+    transition: all 1.5s;
+}
+
+.bg-move-up {
+    transform: translateY(-41.1%);
+    transition: all 1.5s;
+}
+
+.jesus {
+    background-image: url("../images/non-playable characters/jesus.png");
+    background-size: contain;
+
+    position: absolute;
+    width: 60%;
+    top: 8%;
+    bottom: 0;
+    left: 57%;
+    right: 0;
+}
+
+.good-works-lady {
+    background-image: url("../images/non-playable characters/good_works_lady.png");
+    background-size: contain;
+
+    position: absolute;
+    width: 45%;
+    height: 85%;
+    right: -10%;
+    bottom: 0;
+}
+
+.content {
+    /* text */
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    text-shadow: none;
+    text-align: center;
+
+    /* layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* positioning */
+    position: absolute;
+    top: 80%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 0.6em;
+}
+
+.button-container {
+    width: 33%;
+    height: 100%;
+}
+
+.button {
+    /* background */
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+}
+
+.button.black {
+    background-image: url("../images/empty_black_button.png");
+    color: #fff;
+}
+
+.button.skip {
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+
+    color: #B8B8B8;
+}
+
+.button.orange {
+    background-image: url("../images/empty_orange_button.png");
+    color: #000;
+}
+
+.button.right-arrow {
+    background-image: url("../images/right_arrow_button.png");
+
+    color: #000;
+}
+
+.button-yes {
+    /* BC */
+    position: absolute;
+    top: 5%;
+    bottom: 75%;
+    left: 33%;
+    right: 33%;
+    padding-left:0.3em;
+    padding-top: 0.3em;
+
+    font-size: 1.2em;
+    font-family: 'UniversBoldCondensed', Arial, Helvetica, sans-serif;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 4%;
+    bottom: 74%;
+    left: 0;
+    right: 0;
+}
+
+.header .button {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    font-size: 90%;
+    z-index: 1002;
+}
+
+.scene header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    z-index: 1002;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+
+.scene header .button.home {
+    width: 15%;
+    padding: 0.7em 0.5em;
+    flex-direction: row;
+    justify-content: flex-end;
+    z-index: 1002;
+}
+
+.scene header .button.home img {
+    width: 50%;
+}
+
+.footer {
+    width: 100%;
+    /*height: 10%;*/
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+
+    z-index: 1002;
+
+    position: absolute;
+    bottom: 0;
+}
+
+.footer .button.gear {
+    width: 15%;
+    height: 100%;
+    margin: 0;
+    top: 0;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.footer .button.gear img {
+    width: 45%;
+}
+
+.content .button {
+    /* size */
+    width: 50%;
+    height: 25%;
+
+    font-family: 'UniversBoldCondensed', Arial, Helvetica, sans-serif;
+}
+
+.content .text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 4;
+
+    color: #fff;
+}
+
+.content .verse {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+
+    color: #f0c15d;
+}
+
+.content .verse-body {
+    display: flex;
+    align-items: center;
+    flex-grow: 4;
+    padding: 0 0.6em;
+
+    color: #000;
+}
+
+.content.with-verse-body {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.content .avatar-picker {
+    background-color: rgba(243, 243, 243, 0.9);
+
+    padding: 1em 0;
+
+    width: 100%;
+    height: 65%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.avatar-picker .title,
+.avatar-picker .textfield {
+    flex: 1;
+}
+
+.avatar-picker .carousel {
+    flex: 8;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 90%;
+    height: 75%;
+}
+
+.avatar-picker .carousel,
+.avatar-picker .textfield {
+    width: 90%;
+}
+
+.avatar-picker .textfield input {
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+}
+
+.avatar-picker .carousel .body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 90%;
+}
+
+.carousel .body .arrow {
+    flex: 1;
+    height: 100%;
+}
+
+.arrow--image, .avatar--image {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel .body .arrow--image__left { background-image: url("../images/left_arrow.png"); }
+.carousel .body .arrow--image__right { background-image: url("../images/right_arrow.png"); }
+
+.carousel .avatars {
+    flex: 15;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 1em;
+}
+
+.carousel .avatars .avatar__previous,
+.carousel .avatars .avatar__next {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.carousel .avatars .avatar__previous .avatar--image,
+.carousel .avatars .avatar__next .avatar--image {
+    height: 80%;
+}
+
+.carousel .avatars .avatar__current {
+    flex: 2;
+}
+
+.avatar-picker .carousel .navigation {
+    height: 10%;
+    width: 30%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.avatar-picker .carousel .navigation .dot {
+    background-image: url("../images/black_dot.png");
+    background-size: contain;
+    width: 0.4em;
+    height: 0.4em;
+}
+
+.avatar-picker .navigation .dot.selected {
+    background-image: url("../images/teal_dot.png");
+    background-size: contain;
+}
+
+.ui-panel {
+    background-color: #000;
+}
+
+.ui-panel-inner {
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    text-shadow: none;
+}
+
+.ui-panel-inner li {
+    color: #fff;
+}
+
+#selected-language,
+.ui-panel-inner .ui-collapsible-content .ui-listview .menu--language__selected a.ui-btn {
+    color: #0082f5;
+}
+
+.ui-panel-inner .ui-listview {
+    padding: 1em;
+}
+
+.ui-panel-inner .ui-listview > li.ui-first-child {
+    text-align: center;
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    border-top: none;
+}
+
+.ui-panel-inner li.ui-last-child {
+    border-bottom-width: 0 !important;
+}
+
+.ui-panel-inner .ui-collapsible-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ui-panel-inner .ui-collapsible-heading .ui-collapsible-heading-toggle,
+.ui-panel-inner .ui-collapsible-content .ui-listview a.ui-btn {
+    color: #fff;
+    font-size: inherit;
+    font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+    border: none;
+    width: 100%
+}
+
+.ui-panel-inner .ui-collapsible-heading .ui-collapsible-heading-toggle {
+    margin-left: 2.5em;
+}
+
+.ui-panel-inner .ui-collapsible-heading .ui-collapsible-heading-toggle.ui-icon-plus:after,
+.ui-panel-inner .ui-collapsible-heading .ui-collapsible-heading-toggle.ui-icon-minus:after {
+    background-image: url("../images/menu_language_icon.png");
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.ui-panel-inner .ui-collapsible-content {
+    border: none !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+ui.ui-panel-inner .ui-collapsible-content .ui-listview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+ui.ui-panel-inner .ui-collapsible-content .ui-listview li {
+    width: 100%;
+}
+
+.ui-panel-inner .ui-collapsible-content .ui-listview a.ui-btn {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+
+.ui-panel-inner .ui-collapsible-content a.ui-btn:after {
+    background: none;
+}
+
+.menu--option__language .selected-language--icon {
+    width: 1em;
+    height: 1em;
+
+    margin-left: 0.5em;
+
+    background-image: url("../images/down_arrow_icon.png");
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.menu--option__language .selected-language-container {
+    display: flex;
+}
+
+.menu--option__language .selected-language--icon.expanded {
+    background-image: url("../images/down_arrow_icon.png");
+
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+
+/* Single page: Bible apps */
+#scene-13-0 .carousel-wrapper {
+    background-color: rgba(255, 255, 255, 0.3);
+    margin-top: 1.5em;
+    padding: 4px 0 14px 0;
+}
+#scene-13-0 #bible-apps-wrapper h4 {
+    font-size: x-large;
+}
+#scene-13-0 #bible-apps-wrapper p {
+    font-size: x-large;
+}
+#scene-13-0 #worship-wrapper {
+    position: relative;
+}
+#scene-13-0 #worship-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#scene-13-0 footer {
+    position: fixed;
+    bottom: 0;
+    right: 5%;
+    z-index: 1002;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+#scene-13-0 footer .button.home {
+    width: 85%;
+    padding: 0.7em 0.5em;
+    justify-content: flex-end;
+    z-index: 1002;
+}
+#scene-13-0 footer .button.home img {
+    width: 50%;
+}
+
+
+/* Single page: About us */
+.menu--option__about a {
+    width: 100px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding-left: 14px;
+}
+.menu--option__about a:before {
+    content: '';
+    background: url('../images/menu_logo_icon.png');
+    background-size: cover;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: -30px;
+    transform: translate(0px,-2.5px);
+}
+#scene-0-0-1 #bg-3 a {
+    text-decoration: none;
+    color: #fff;
+}
+#scene-0-0-1 p {
+    font-size: 90%;
+}
+#topbar {
+    background-color: black;
+}
+#whiteline {
+    background-color: white;
+    background-position: center top;
+    background-size: 100% auto;
+    height: 2px;
+}
+#bg-1 {
+    background-image: url("../images/backgrounds/0.0.1 bg-1.jpg");
+    background-size: cover;
+    background-position: center top;
+    height: 26vh;
+}
+#bg-2 {
+    background-image: url("../images/backgrounds/0.0.1 bg-2.jpg");
+    background-size: cover;
+    background-position: center top;
+    height: 36vh;
+}
+#bg-3 {
+    background-image: url("../images/backgrounds/0.0.1 bg-3.jpg");
+    background-size: cover;
+    background-position: center top;
+    height: 30vh;
+}
+.row {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-right: -15px;
+    margin-left: -15px;
+    background-position: center top;
+    background-size: 100% auto;
+    height: 3px;
+}
+.row h2 {
+    margin-top: -1em;
+    orphans: 3;
+    widows: 3;
+    page-break-after: avoid;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+.row h4 {
+    line-height: 1.1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+.col-xs-12 {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    width: 100%;
+}
+.col-xs-8 {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    width: 66.66666667%;
+}
+.col-xs-4 {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    width: 33.33333333%;
+}
+
+/* Single page: Tutorial*/
+.menu--option__tutorial a {
+    width: 100px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding-left: 14px;
+}
+.menu--option__tutorial a:before {
+    content: '';
+    background: url('../images/tutorial.png');
+    background-size: cover;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: -30px;
+    transform: translate(0px,-2px);
+}
+
+
+/* iPhone 4/5 */
+@media (max-width: 320px) {
+
+    /* Single page: About Us */
+    #scene-0-0-1 .row h4 {
+        font-size: 85%;
+    }
+    #scene-0-0-1 p {
+        font-size: 70%;
+    }
+
+    /* Fix overlapping of text */
+    .content .text,
+    .content .verse {
+        font-size: 75% !important;
+    }
+    .content .verse-body {
+        font-size: 75%;
+    }
+    .button {
+        font-size: 50%;
+    }
+
+    /* Menu */
+    .menu--language {
+        font-size: 75%;
+    }
+    .menu--language a {
+        margin-top: 0;
+    }
+    #menu .menu--language-list {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+
+
+/* iPhone 5 */
+@media (min-height: 481px) and (max-height: 568px) {
+    .header .button {
+    font-size: 80%;
+}
+
+    /* Single page: Bible apps */
+    #scene-13-0 p {
+        font-size: 90%;
+    }
+    #scene-13-0 .highlight {
+        font-size: 90%;
+    }
+    #scene-13-0 #bible-apps-wrapper img {
+        width: 30%;
+    }
+    #scene-13-0 footer {
+        bottom: 1.2em;
+    }
+}
+
+/* iPhone 4 */
+@media (max-height: 480px) {
+    .header .button {
+    font-size: 60%;
+}
+    .avatar {width: 38%;}
+    /* Adjust first aid box */
+    .young-girl .avatar--prop__first-aid-box {
+        top: 20%;
+    }
+    .young-boy .avatar--prop__first-aid-box {
+        top: 24%;
+    }
+    .working-woman .avatar--prop__first-aid-box {
+        top: 24%;
+        right: 66%;
+    }
+    .working-man .avatar--prop__first-aid-box {
+        top: 18%;
+        right: 64%;
+    }
+    .family-woman .avatar--prop__first-aid-box {
+        top: 21%;
+    }
+    .family-man .avatar--prop__first-aid-box {
+        top: 24%;
+        right: 64%;
+    }
+    .old-woman .avatar--prop__first-aid-box {
+        top: 25%;
+        right: 30%;
+    }
+    .old-man .avatar--prop__first-aid-box {
+        top: 25%;
+        right: 22%;
+    }
+    .army-boy .avatar--prop__first-aid-box {
+        top: 22%;
+    }
+
+    /* Single page: Bible apps */
+    #scene-13-0 p {
+        font-size: 80%;
+    }
+    #scene-13-0 .highlight {
+        font-size: 70%;
+    }
+    #scene-13-0 #bible-apps-wrapper img {
+        width: 20%;
+    }
+    #scene-13-0 #bible-apps-wrapper p {
+        font-size: 70%;
+    }
+    #scene-13-0 footer {
+        bottom: 3em;
+    }
+}
+
+/* Animation: Gear spinning */
+#scene-7-0 .header {z-index: 0;}
+#gear-1,
+#gear-2,
+#gear-3,
+#gear-4 {z-index: -1; position: absolute;}
+
+#gear-1 {
+    top:40%;
+    left: 28%;
+    width: 35%;
+    animation:spin 4s linear infinite;
+}
+
+#gear-2 {
+    top:120%;
+    left: 60%;
+    width: 25%;
+    animation:spin-reverse 4s linear infinite;
+}
+
+#gear-3 {
+    top:60%;
+    left: 65%;
+    width: 20%;
+    animation:spin 4s linear infinite;
+}
+
+#gear-4 {
+    top:145%;
+    left: 40%;
+    width: 18%;
+    animation:spin 4s linear infinite;
+}
+
+@keyframes spin { 100% { transform:rotate(360deg); } }
+@keyframes spin-reverse { 100% { transform:rotate(-360deg); } }
+
+/* Animation: Swipe */
+.swipe-hand {
+    position:absolute;
+    bottom:10%;
+    right:10%;
+    animation:swipe-hand 1.2s infinite;
+}
+
+@keyframes swipe-hand{
+    0%{right:10%;}
+    10%{right:15%; opacity: .5; transform: rotate(-5deg);}
+    20%{right:20%; opacity: .8; transform: rotate(-10deg);}
+    30%{right:25%; opacity: .5; transform: rotate(-15deg);}
+    40%{right:30%; transform: rotate(-20deg);}
+    50%{right:35%; opacity: .5; transform: rotate(-25deg);}
+    60%{right:40%; opacity: .8; transform: rotate(-30deg);}
+    70%{right:45%; opacity: .5; transform: rotate(-30deg);}
+    80%{opacity: 0}
+    95%{opacity: 0}
+    100%{opacity: 0}
+}
+
+.swipe-arrow {
+    position:absolute;
+    bottom:23%;
+    right:28%;
+    animation:swipe-arrow 1.2s infinite;
+}
+
+@keyframes swipe-arrow{
+    0%{right:28%;}
+    10%{right:33%; opacity: .5;}
+    20%{right:38%; opacity: .8;}
+    30%{right:43%; opacity: .5;}
+    40%{right:48%;}
+    50%{right:53%; opacity: .5;}
+    60%{right:58%; opacity: .8;}
+    70%{right:63%; opacity: .5;}
+    80%{opacity: 0;}
+    95%{opacity: 0;}
+    100%{opacity: 0;}
+}
+
+#button_back {
+  animation-delay: 5.0715s !important;
+  animation-duration: 0.925s !important;
+}
+
+/* Added by Frank Grisafi 11/2/2017 */
+/* Makes each button in scene4 grow into it's 100% size */
+#scene-4-0 > div.header > div{
+ transform: scale(0);
+
+ animation-name: appear;
+ animation-duration: 0.6s;
+ animation-fill-mode: forwards;
+ animation-timing-function: ease-out;
+}
+@keyframes appear{
+  to{ transform: scale(1); }
+}
+#scene-4-0 > div.header > div:nth-child(2){
+ animation-delay: 0.6s;
+}
+#scene-4-0 > div.header > div:nth-child(3){
+ animation-delay: 1.2s;
+}
+/* End of addition by Frank Grisafi 11/2/2017 */
+
+
+/* Added by Frank Grisafi 11/2/2017 */
+/* shrinks or grows buttons based on prev scene viewed */
+/* Shrinking button */
+#scene-5-0:target div.header > div:nth-child(1),
+#scene-6-0:target div.header > div:nth-child(2),
+#scene-7-0:target div.header > div:nth-child(3){
+ animation-name: shrink-grow;
+ animation-duration: 0.6s;
+ animation-fill-mode: forwards;
+ animation-timing-function: ease-in;
+}
+/* Growing button */
+#scene-5-0prev:checked ~ #scene-6-0:target div.header > div:nth-child(1),
+#scene-5-0prev:checked ~ #scene-7-0:target div.header > div:nth-child(1),
+#scene-6-0prev:checked ~ #scene-5-0:target div.header > div:nth-child(2),
+#scene-6-0prev:checked ~ #scene-7-0:target div.header > div:nth-child(2),
+#scene-7-0prev:checked ~ #scene-5-0:target div.header > div:nth-child(3),
+#scene-7-0prev:checked ~ #scene-6-0:target div.header > div:nth-child(3){
+ animation-name: shrink-grow;
+ animation-duration: 0.6s;
+ animation-fill-mode: backwards;
+ animation-timing-function: ease-out;
+ animation-direction: reverse;
+}
+@keyframes shrink-grow{
+to{
+   opacity: 0;
+   width: 0;
+   height: 0;
+   font-size: 0;
+  }
+}
+
+input[name="prevscene"]{
+ position: fixed;
+ left: -99999px;
+ top: -99999px;
+}
+/* End of addition by Frank Grisafi 11/2/2017 */
+
+/* Added by FrankG 11/6/2017 */
+/* Seperated the steps of the animation out for better control and
+   to flip the Name and Cross back
+*/
+.scene-9-1 > #speaker{
+    animation-name: scene-9-1-walking, moveright, flip;
+    animation-duration: 1s, 3s, 0.2s;
+    animation-delay: 0s, 0s, 3s;
+    animation-iteration-count: 3, 1, 1;
+    animation-timing-function: step-start, linear, linear;
+    animation-fill-mode: none, forwards, forwards;
+}
+@keyframes moveright{
+ to{ left: 69%; }
+}
+@keyframes flip{
+ to{ transform: rotateY(180deg); }
+}
+.scene-9-1 > #speaker > div.avatar--name,
+.scene-9-1 > #speaker-cross{
+ animation-name: flip;
+ animation-duration: 0.2s;
+ animation-delay: 3s;
+ animation-iteration-count: 1;
+ animation-timing-function: linear;
+ animation-fill-mode: forwards;
+}
+.scene-9-1 > #jesus{
+ animation-name: moveleft;
+ animation-duration: 2s;
+ animation-delay: 0.5s;
+ animation-timing-function: ease-in-out;
+ animation-fill-mode: forwards;
+}
+@keyframes moveleft{
+ to{ left: 46%; }
+}
+/* End of addition by FrankG 11/6/2017 */
+
+/* Added by Frank Grisafi 11/7/2017 */
+body > div.scene-2-0,
+body > div.scene-2-1,
+body > div.scene-2-2,
+body > div.scene-3-0,
+body > div.scene-3-1,
+body > div.scene-3-2,
+body > div.scene-4-0,
+body > div.scene-8-0,
+body > div.scene-8-2,
+body > div.scene-9-2{
+ z-index: 9;
+}
+
+/* BC */
+body > div.scene-10-0,
+body > div.scene-10-1,
+body > div.scene-11-0{
+    z-index: 9;
+}
+
+body > div.scene-2-0 ~ #scene-2-0 > *,
+body > div.scene-2-1 ~ #scene-2-1 > *,
+body > div.scene-2-2 ~ #scene-2-2 > *,
+body > div.scene-3-0 ~ #scene-3-0 > *,
+body > div.scene-3-1 ~ #scene-3-1 > *,
+body > div.scene-3-2 ~ #scene-3-2 > *,
+body > div.scene-4-0 ~ #scene-4-0 > *,
+body > div.scene-8-0 ~ #scene-8-0 > *,
+body > div.scene-8-2 ~ #scene-8-2 > *,
+body > div.scene-9-2 ~ #scene-9-2 > *{
+ z-index: 6;
+}
+
+/* BC */
+body > div.scene-10-0 ~ #scene-10-0 > *,
+body > div.scene-10-1 ~ #scene-10-1 > *,
+body > div.scene-11-0 ~ #scene-11-0 > *{
+    z-index: 6;
+}
+
+div.god-header{
+ position: relative;
+}
+
+#forwardbackward{
+ position: fixed;
+ left: -99999px;
+ top: -99999px;
+}
+
+div.scene > div.prevbg,
+div.scene > div.currbg,
+div.scene > div.nextbg{
+ position: absolute;
+ left: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ background-repeat: no-repeat;
+ background-position: center center;
+ background-size: cover;
+ font-size: 0;
+ white-space: nowrap;
+ opacity: 0;
+ z-index: 6;
+
+ animation-duration: 1.5s;
+ animation-timing-function: ease-out;
+ animation-direction: reverse;
+}
+
+#forwardbackward:checked ~ div.scene > div.nextbg,
+#forwardbackward:not(:checked) ~ div.scene > div.prevbg{
+ animation-name: fade-in;
+}
+
+#scene-2-2 > div.nextbg,
+#scene-3-0 > div.prevbg,
+div.scene > div.currbg{
+ width: 200%;
+}
+#scene-2-2 > div.nextbg > div,
+#scene-3-0 > div.prevbg > div,
+div.scene > div.currbg > div{
+ position: relative;
+ display: inline-block;
+ width: 50%;
+ height: 100%;
+ background-repeat: no-repeat;
+ background-position: center center;
+ background-size: cover;
+}
+#forwardbackward:not(:checked) ~ div.scene-3-0 ~ #scene-3-0:target{
+ background-color: #444;
+
+ animation-name: background-swap;
+ animation-duration: 2.0s;
+}
+#forwardbackward:checked ~ div.scene-2-2 ~ #scene-2-2:target{
+ animation-name: background-swap;
+ animation-duration: 1.3s;
+}
+@keyframes background-swap{
+ to{ background-image: none; }
+ from{ background-image: none; }
+}
+@keyframes slide-in-out{
+ from{ left: -100%; }
+ to{ left: 0; }
+}
+
+/* Moving forward, swiping left */
+#forwardbackward:checked ~ #scene-2-2:target > div.nextbg,
+#forwardbackward:checked ~ #scene-2-2:target > div.currbg,
+#forwardbackward:not(:checked) ~ #scene-3-0:target > div.currbg,
+#forwardbackward:not(:checked) ~ #scene-3-0:target > div.prevbg{
+ animation-name: fade-in, slide-in-out;
+ animation-duration: 1.5s, 1.5s;
+ animation-timing-function: linear, linear;
+}
+#forwardbackward:checked ~ #scene-2-2:target > div.currbg,
+#forwardbackward:not(:checked) ~ #scene-3-0:target > div.currbg{
+ animation-direction: normal, normal;
+}
+#forwardbackward:checked ~ #scene-2-2:target > div.nextbg,
+#forwardbackward:not(:checked) ~ #scene-3-0:target > div.prevbg{
+ animation-direction: reverse, reverse;
+}
+#forwardbackward:not(:checked) ~ #scene-3-0:target > div.currbg{
+ animation-duration: 1.0s, 1.5s;
+ animation-delay: 1.0s, 0s;
+}
+
+#scene-2-0,
+#scene-2-1 > div.prevbg{
+ background-image: url("../images/backgrounds/2.3 (640x1136).jpg");
+}
+#scene-2-2 > div.prevbg,
+#scene-2-0 > div.nextbg{
+ background-image: url("../images/backgrounds/2.1 (640x1136).jpg");
+}
+#scene-3-0 > div.prevbg > div,
+#scene-2-2 > div.currbg > div,
+#scene-2-1 > div.nextbg{
+ background-image: url("../images/backgrounds/2.2 (640x1136).jpg");
+}
+#scene-3-1 > div.prevbg,
+#scene-2-2 > div.nextbg > div,
+#scene-3-0 > div.currbg > div{
+ background-image: url("../images/backgrounds/3.0 But our relationship....png");
+}
+#scene-3-2 > div.prevbg,
+#scene-3-0 > div.nextbg{
+ background-image: url("../images/backgrounds/3.1 What is Sin_.png");
+}
+#scene-4-0 > div.prevbg,
+#scene-3-1 > div.nextbg{
+ background-image: url("../images/backgrounds/3.2 Romans 3_23....png");
+}
+#scene-8-0 > div.prevbg,
+#scene-3-2 > div.nextbg{
+ background-image: url("../images/backgrounds/4.0 But then our hearts....png");
+}
+#scene-8-2 > div.prevbg,
+#scene-4-0 > div.nextbg{
+ background-image: url("../images/backgrounds/8.0 (640x1136).jpg");
+}
+#scene-8-0 > div.nextbg{
+ background-image: url("../images/backgrounds/8.2 (640x1136).jpg");
+}
+/* End of Added by Frank Grisafi 11/7/2017 */
+
+#scene-9-2 > div.prevbg{
+ background-image: url("../images/backgrounds/9.1 I made a wonderful....png");
+}
+
+/* BC */
+
+#scene-10-1 > div.prevbg,
+#scene-11-1 > div.nextbg {
+    background-image: url("../images/backgrounds/10.1 Sinners Prayer.jpg");
+}
+
+/* Added by Frank Grisafi 11/11/2017  */
+#scene-1-0,
+#scene-2-0{
+ overflow-y: hidden;
+}
+
+#forwardbackward:not(:checked) ~ #scene-1-0 > #scene-2-0nextscene{
+ display: none;
+}
+
+#forwardbackward:not(:checked) ~ div.scene-2-0{
+ opacity: 0;
+
+ animation-name: fade-in;
+ animation-duration: 0.001s;
+ animation-delay: 1.1s;
+ animation-fill-mode: forwards;
+}
+
+#scene-2-0nextscene,
+#scene-2-0nextscene > div,
+#scene-1-0prevscene,
+#scene-1-0prevscene > div{
+ position: absolute;
+ width: 100%;
+ height: 200%;
+ left: 0;
+ bottom: 0;
+ background-position: center 75%;
+ background-size: cover;
+ background-image: url("../images/backgrounds/0.0 bg-complete-sky.jpg");
+ background-color: #FFF;
+
+ animation-name: move-down-up, fade-in;
+ animation-delay: 0s, 1.4s;
+ animation-duration: 1.2s, 0.4s;
+ animation-timing-function: linear, linear;
+ animation-direction: normal, reverse;
+ animation-fill-mode: forwards, forwards;
+}
+@keyframes move-down-up{
+ from{ bottom: 0; }
+ to{ bottom: -100%; }
+}
+#scene-2-0nextscene,
+#scene-2-0nextscene > div{
+ bottom: 0;
+
+ animation-direction: reverse, reverse;
+}
+
+#scene-1-0prevscene{
+  z-index: 4;
+}
+
+#scene-2-0nextscene > div,
+#scene-1-0prevscene > div{
+ top: -50%;
+ height: 50%;
+ background-position: left bottom;
+ background-size: 100% 200%;
+
+ animation-name: none;
+}
+#scene-1-0prevscene > div.transscene2{
+ height: 150%;
+ background-image: none;
+    opacity: 0;
+
+ animation-name: fade-in;
+ animation-delay: 0.8s;
+ animation-duration: 0.4s;
+ animation-fill-mode: forwards;
+ animation-timing-function: linear;
+
+ animation-direction: normal;
+}
+
+
+#scene-2-0nextscene > div.transscene2{
+ height: 150%;
+ background-image: none;
+ opacity: 1;
+
+ animation-name: fade-in;
+ animation-delay: 0.2s;
+ animation-duration: 0.8s;
+ animation-fill-mode: forwards;
+ animation-timing-function: linear;
+ animation-direction: reverse;
+}
+/* End of Added by Frank Grisafi 11/11/2017  */
+
+/* BC */
+#scene-10-0 .content {
+    top: 50%;
+    opacity: 0;
+    animation-name: textFadeIn;
+    animation-delay: 6.5s;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes textFadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+.shiftup {
+  transform: translate(0px, -15px);
+}
+
+.sidebarmenufont {
+  font-family: 'UniversLight', Arial, Helvetica, sans-serif;
+  font-weight:700;
+}
+
+.t-body{
+  font-weight:595;
+}
+
+.moreorange {
+  color: #ffc300 !important;
+  transform: scaleY(1.2);
+}
+
+.remove-shadow {
+  text-shadow: 0 0px 0 #f3f3f3 !important;
+}

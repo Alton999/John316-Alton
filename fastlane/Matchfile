@@ -1,0 +1,6 @@
+git_url("ssh://hogc@vs-ssh.visualstudio.com:22/John316App/_ssh/John316App")
+
+type("development") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier(["org.influencecomm.john316.beta", "org.influencecomm.john316"])
+username("john316.hogc.team@gmail.com") # Your Apple Developer Portal username
