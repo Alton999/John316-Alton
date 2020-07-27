@@ -930,7 +930,6 @@ const localizedStrings = {
       "scene-0-0-1-about-hogc": "HOGC 소개",
       "scene-0-0-1-about-social-content": "Heart of God Church(HOGC)는 독립 교단의 청년교회입니다. 교회 또는 담임 목사님 Pastor How와 Pastor Lia 두 분에 대해 더 자세히 알고 싶으시다면 www.heartofgodchurch.org을 방문하거나 교회 소셜 미디어를 팔로우하세요.",
       "scene-0-0-1-about-featured": "특집 설교 말씀 & 기사",
-
       "scene-0-0-2-tutorial-john": "JOHN",
       "scene-0-0-2-tutorial-316": "316",
       "scene-0-0-2-tutorial-guide": "GUIDE",
@@ -971,7 +970,6 @@ const localizedStrings = {
       "scene-0-0-2-tutorial-freeBibles": "무료 성경",
       "scene-0-0-2-tutorial-life": "Bible by Life Church",
       "scene-0-0-2-tutorial-olive": "Bible by Olive Tree",
-
       "scene-0-1-options-header": "설정",
       "scene-0-1-language": "언어",
       "scene-0-1-language-english": "ENGLISH",
